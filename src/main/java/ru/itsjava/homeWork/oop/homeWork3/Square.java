@@ -17,7 +17,7 @@ public class Square extends Figure {
     // Методы
     // Вернуть значение периметра квадрата
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         if (sideA <= 0) {
             System.out.print("Проверьте корректность длины сторон квадрата: ");
             return 0;

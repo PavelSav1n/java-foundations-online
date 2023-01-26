@@ -19,7 +19,7 @@ public class Rectangle extends Figure {
     // Методы
     // Вернуть значение периметра прямоугольника
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         if (sideA <= 0 || sideB <= 0) {
             System.out.print("Проверьте корректность длины сторон квадрата: ");
             return 0;

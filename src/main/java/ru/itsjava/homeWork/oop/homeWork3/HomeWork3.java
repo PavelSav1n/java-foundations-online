@@ -46,6 +46,7 @@ public class HomeWork3 {
         Figure rectangle1 = new Rectangle(3, 5);
         Figure square0 = new Square(3);
         Square square1 = new Square(4);
+        Figure circle = new Circle(5);
 
         System.out.println("**********************************");
         System.out.println("-------------Perimeter------------");
@@ -56,6 +57,7 @@ public class HomeWork3 {
         System.out.println("rectangle1 = " + rectangle1.getPerimeter());
         System.out.println("square0 = " + square0.getPerimeter());
         System.out.println("square1 = " + square1.getPerimeter());
+        System.out.println("circle.getPerimeter() = " + circle.getPerimeter());
 
         System.out.println("**********************************");
         System.out.println("---------------Area---------------");
@@ -66,5 +68,8 @@ public class HomeWork3 {
         System.out.println("rectangle1.getArea() = " + rectangle1.getArea());
         System.out.println("square0.getArea() = " + square0.getArea());
         System.out.println("square1.getArea() = " + square1.getArea());
+        System.out.println("circle.getArea() = " + circle.getArea());
+
+
     }
 }

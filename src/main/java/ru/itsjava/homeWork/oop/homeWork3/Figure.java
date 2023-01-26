@@ -11,7 +11,7 @@ public class Figure {
     }
 
     //Методы
-    public int getPerimeter() {
+    public double getPerimeter() {
         System.out.println("Периметр внутри суперкласса Figure");
         return 0;
 

@@ -22,7 +22,7 @@ public class Triangle extends Figure {
     // Методы
     // Вернуть значение периметра треугольника
     @Override
-    public int getPerimeter() {
+    public double getPerimeter() {
         if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
             System.out.print("Стороны треугольника должны быть больше 0! ");
             return 0;
