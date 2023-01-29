@@ -18,5 +18,13 @@ public class homeWork11 {
         man.talk();
         System.out.print("Plant plant.eat() = ");
         plant.eat();
+
+        // Просто для демонcтрации дефолтных методов в интерфейсах Eatable, Talkable
+        Chicken chicken = new Chicken();
+        System.out.print("Chicken chicken.talk() = ");
+        chicken.talk();
+        System.out.print("Chicken chicken.eat() = ");
+        chicken.eat();
+
     }
 }
