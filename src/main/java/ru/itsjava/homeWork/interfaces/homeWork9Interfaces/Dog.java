@@ -1,15 +1,15 @@
 package ru.itsjava.homeWork.interfaces.homeWork9Interfaces;
 
-public class Dog implements Runnable, Flyable, Swimmable, Walkable{
-    @Override
-    public String flyMaxDistance() {
-        return "Dogs usually don't fly. But if you take them on a plane...";
-    }
-
-    @Override
-    public void fly() {
-        System.out.println("Nope, don't want to.");
-    }
+public class Dog implements Runnable, Swimmable, Walkable {
+//    @Override
+//    public String flyMaxDistance() {
+//        return "Dogs usually don't fly. But if you take them on a plane...";
+//    }
+//
+//    @Override
+//    public void fly() {
+//        System.out.println("Nope, don't want to.");
+//    }
 
     @Override
     public int maxRunDistance() {
@@ -19,7 +19,6 @@ public class Dog implements Runnable, Flyable, Swimmable, Walkable{
     @Override
     public void run() {
         System.out.println("Woof woof, I'm running!");
-
     }
 
     @Override

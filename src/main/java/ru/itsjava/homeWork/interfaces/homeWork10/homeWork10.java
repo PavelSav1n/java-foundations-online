@@ -9,27 +9,28 @@ import java.util.Arrays;
 //5. В классе Main создать клона некоторого Person.
 
 public class homeWork10 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         Person ivan = new Person("Ivan", "Ivanov", 18);
         Person petr = new Person("Petr", "Ivanov", 29);
         Person igor = new Person("Igor", "Vasiliev", 31);
         Person ivan2 = new Person("Ivan", "Ivanov", 34);
-        Person ivan3 = new Person("Ivan", "Rodionov", 53 );
+        Person ivan3 = new Person("Ivan", "Rodionov", 53);
         System.out.println("ivan.compareTo(petr) = " + ivan.compareTo(petr));
-        System.out.println("ivan.compareTo2(petr) = " + ivan.compareTo2(petr));
+        //  System.out.println("ivan.compareTo2(petr) = " + ivan.compareTo2(petr));
         System.out.println("ivan.compareTo(igor) = " + ivan.compareTo(igor));
-        System.out.println("ivan.compareTo2(igor) = " + ivan.compareTo2(igor));
+        //  System.out.println("ivan.compareTo2(igor) = " + ivan.compareTo2(igor));
         System.out.println("ivan.compareTo(ivan2) = " + ivan.compareTo(ivan2));
-        System.out.println("ivan.compareTo2(ivan2) = " + ivan.compareTo2(ivan2));
+        //  System.out.println("ivan.compareTo2(ivan2) = " + ivan.compareTo2(ivan2));
         System.out.println("ivan.compareTo(ivan3) = " + ivan.compareTo(ivan3));
-        System.out.println("ivan.compareTo2(ivan3) = " + ivan3.compareTo2(ivan));
+        //  System.out.println("ivan.compareTo2(ivan3) = " + ivan3.compareTo2(ivan));
 
         Person[] persons = {ivan, petr, igor, ivan2, ivan3};
         System.out.println("persons before Arrays.toString() " + Arrays.toString(persons));
+        // метод Arrays.sort() использует наш метод compareTo(), который мы переопределили для нашего класса Person. Поэтому результат сортировки будет зависеть от логики нашей реализации.
         Arrays.sort(persons);
         System.out.println("persons after Arrays.toString() = " + Arrays.toString(persons));
 
-        Person igor2 = igor.clone();
+        Person igor2 = (Person) igor.clone();
         System.out.println("igor2 = " + igor2);
         System.out.println("igor.compareTo(igor2) = " + igor.compareTo(igor2));
 

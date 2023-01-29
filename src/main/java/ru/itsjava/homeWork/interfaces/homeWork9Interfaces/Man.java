@@ -1,15 +1,15 @@
 package ru.itsjava.homeWork.interfaces.homeWork9Interfaces;
 
-public class Man implements Runnable, Flyable, Swimmable, Walkable{
-    @Override
-    public String flyMaxDistance() {
-        return "Limitless, eternity is not a limit!";
-    }
-
-    @Override
-    public void fly() {
-        System.out.println("Time to take a plane!");
-    }
+public class Man implements Runnable, Swimmable, Walkable {
+//    @Override
+//    public String flyMaxDistance() {
+//        return "Limitless, eternity is not a limit!";
+//    }
+//
+//    @Override
+//    public void fly() {
+//        System.out.println("Time to take a plane!");
+//    }
 
     @Override
     public int maxRunDistance() {

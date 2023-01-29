@@ -6,5 +6,9 @@ public class InterfacePractice {
         khottabych.createWish();
         Creatable badGin = new BadGin();
         badGin.createWish();
+
+        khottabych.canYouCreateWish();
+        badGin.canYouCreateWish();
+
     }
 }

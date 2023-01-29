@@ -1,16 +1,16 @@
 package ru.itsjava.homeWork.interfaces.homeWork9Interfaces;
 
-public class Cat implements Runnable, Flyable, Swimmable, Walkable{
-    @Override
-    public String flyMaxDistance() {
-        return "Cats usually don't fly. But if you take them on a plane...";
-    }
-
-    @Override
-    public void fly() {
-        System.out.println("Nope, don't want to fly right meow.");
-
-    }
+public class Cat implements Runnable, Swimmable, Walkable {
+//    @Override
+//    public String flyMaxDistance() {
+//        return "Cats usually don't fly. But if you take them on a plane...";
+//    }
+//
+//    @Override
+//    public void fly() {
+//        System.out.println("Nope, don't want to fly right meow.");
+//
+//    }
 
     @Override
     public int maxRunDistance() {
