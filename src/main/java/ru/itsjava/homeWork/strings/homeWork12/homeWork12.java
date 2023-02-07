@@ -153,7 +153,7 @@ public class homeWork12 {
         // substring()
         // public String substring(int beginIndex, int endIndex)
         // Возвращает подстроку данной строки начиная и заканчивая заданными индексами
-        System.out.println("str.substring(1,3) = " + str.substring(1, 4));
+        System.out.println("str.substring(1,4) = " + str.substring(1, 4));
 
         // toCharArray()
         // public char[] toCharArray()
