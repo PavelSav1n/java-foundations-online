@@ -160,6 +160,56 @@ public class homeWork12 {
         // Возвращает массив, состоящий из символов данной строки:
         System.out.println("Arrays.toString(str.toCharArray()) = " + Arrays.toString(str.toCharArray()));
 
+        /* ************************ */
+
+        StringBuilder strBuilder = new StringBuilder(" Это тоже строка ");
+
+        // append()
+        // public StringBuilder append(String str)
+        // Добавляет к исходной строке входящую строку:
+        System.out.println("strBuilder.append(\"!\") = " + strBuilder.append("!"));
+
+        // delete()
+        // public StringBuilder delete(int start, int end)
+        // Удаляет из исходной строки входящий диапазон индексов
+        System.out.println("strBuilder.delete(4, 9) = " + strBuilder.delete(4, 9));
+
+        // insert()
+        // public StringBuilder insert(int offset, String str)
+        // Добавляет к исходной строке начиная с входящего индекса входящую подстроку (так же можно int, double, char, char[] и т.п.)
+        System.out.println("strBuilder.insert(4, \" вставленная\") = " + strBuilder.insert(4, " вставленная"));
+
+        // replace()
+        // public StringBuilder replace(int start, int end, String str)
+        // Заменяет в исходной строке подстроку между начальным и конечным индексом, входящей подстрокой
+        System.out.println("strBuilder.replace( 4,9, \" заменённая\") = " + strBuilder.replace(4, 9, " заменённая"));
+
+        // reverse()
+        // public StringBuilder reverse()
+        // реализован в public AbstractStringBuilder reverse()
+        // Инвертирует исходную строку (отражает по вертикали индексы)
+        System.out.println("strBuilder.reverse() = " + strBuilder.reverse());
+
+
+        // capacity()
+        // public int capacity()
+        // Возвращает текущий объём занимаемого пространства, который доступен для вставляемых символов.
+        // Это объём, после превышения которого потребуется расширение пространства.
+        System.out.println("strBuilder.capacity() = " + strBuilder.capacity());
+
+        // setLength()
+        // public void setLength(int newLength)
+        // Задаёт новый размер последовательности символов, согласно заданному значению
+        strBuilder.setLength(44);
+        System.out.println("strBuilder.capacity() = " + strBuilder.capacity());
+        System.out.println("strBuilder = " + strBuilder);
+
+        // trimToSize()
+        // public void trimToSize()
+        // Попытка уменьшить занимаемый объём исходной строки:
+        strBuilder.trimToSize();
+        System.out.println("strBuilder.capacity() = " + strBuilder.capacity());
+        System.out.println("strBuilder = " + strBuilder);
 
     }
 }
