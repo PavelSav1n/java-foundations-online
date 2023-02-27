@@ -1,4 +1,4 @@
-package ru.itsjava.homeWork.exceptions;
+package ru.itsjava.homeWork.exceptions.homeWork13;
 
 public class ExceptionPractice {
     public static void main(String[] args) {

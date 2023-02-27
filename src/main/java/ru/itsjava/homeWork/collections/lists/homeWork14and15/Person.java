@@ -1,4 +1,4 @@
-package ru.itsjava.homeWork.collections.lists.homeWork14;
+package ru.itsjava.homeWork.collections.lists.homeWork14and15;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
