@@ -26,9 +26,10 @@
 package ru.itsjava.homeWork.collections.lists.homeWork14;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class HomeWork14 {
+public class HomeWork14and15 {
     public static void main(String[] args) {
 
         System.out.println("*******************************");
@@ -57,7 +58,7 @@ public class HomeWork14 {
         System.out.println("*******************************");
         System.out.println("1. Задача на вставку элемента:");
         // Объекты 20 книг Стругацких, переменные которых будут равны году их первой публикации, а количество страниц -- произвольное значение.
-        // Из них используем только 7
+        // Из них используем только 7 + Добавил 4 книги со словом JAVA в названии:
         Book book1959 = new Book("Страна багровых туч", "Аркадий и Борис Стругацкие", 123);
         Book book1960 = new Book("Извне", "Аркадий и Борис Стругацкие", 231);
         Book book1960_2 = new Book("Путь на Амальтею", "Аркадий и Борис Стругацкие", 321);
@@ -69,6 +70,13 @@ public class HomeWork14 {
 //        Book book1965 = new Book("Понедельник начинается в субботу", "Аркадий и Борис Стругацкие", 376);
 //        Book book1965_2 = new Book("Хищные вещи века", "Аркадий и Борис Стругацкие", 543);
 //        Book book1965_3 = new Book("Беспокойство", "Аркадий и Борис Стругацкие", 721);
+        Book bookJava = new Book("Java", "Some Author", 435);
+        Book bookJava2 = new Book("Java", "Some Author", 65);
+        Book bookJava3 = new Book("Java", "Some Author", 670);
+        Book bookJava4 = new Book("Java", "Some Author", 234);
+        Book bookAuthorThree = new Book("Author Three Letter", "Три", 123);
+        Book bookAuthorSix = new Book("Author Six Letter", "Шеесть", 123);
+
 //        Book book1966 = new Book("Улитка на склоне", "Аркадий и Борис Стругацкие", 243);
 //        Book book1967 = new Book("Гадкие лебеди", "Аркадий и Борис Стругацкие", 987);
 //        Book book1968 = new Book("Второе нашествие марсиан", "Аркадий и Борис Стругацкие", 234);
@@ -146,12 +154,115 @@ public class HomeWork14 {
         System.out.print("bookList: [ ");
         for (int i = 0; i < bookList.size(); i++) {
             if (i == bookList.size() - 1) {
-                System.out.print(bookList.get(i)+";");
+                System.out.print(bookList.get(i) + ";");
             } else {
                 System.out.println(bookList.get(i) + ";");
             }
         }
         System.out.println("]");
+
+
+//        ********************** homework 15 begin **********************
+        System.out.println("********************** homework 15 begin **********************");
+
+//        добавить 4 книги с названием "Java"
+        bookList.add(bookJava);
+        bookList.add(bookJava2);
+        bookList.add(bookJava3);
+        bookList.add(bookJava4);
+
+        System.out.println("*******************************");
+        System.out.println("6. Отфильтровать список вернуть записи по некоторому условию:");
+        System.out.println("а) Условие на индекс: Индекс делится на 3");
+        for (int i = 3; i < bookList.size(); i++) {
+            if (i % 3 == 0) {
+                System.out.println("bookList.get(" + i + ") = " + bookList.get(i));
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("б) Условие на значение: Вернуть количество книг, которые равны \"Java\"");
+        for (Book bookElem : bookList) {
+            if (bookElem.getName().equals("Java")) {
+                System.out.println(" -- " + bookElem);
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("7. Пропустить несколько первых элементов");
+        System.out.println("а) Пропустить первые 3 книги в списке.");
+        int numberOfBooksToSkip = 3;
+        for (int i = numberOfBooksToSkip; i < bookList.size(); i++) {
+            System.out.println("bookList.get(" + i + ") = " + bookList.get(i));
+        }
+
+        System.out.println("*******************************");
+        System.out.println("6 + 7: Пропускаем элементы, которые удовлетворяют некоторому условию");
+        System.out.println("а) Пропустить первые 2 книги, которые равные \"Java\"");
+        numberOfBooksToSkip = 2;
+        int javaBooksCount = 0;
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getName().equals("Java") && javaBooksCount < numberOfBooksToSkip) {
+                javaBooksCount++;
+            } else {
+                System.out.println("bookList.get(" + i + ") = " + bookList.get(i));
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("8. Вернуть первый подходящий элемент:");
+        System.out.println("а) Возвращаем первую книгу, длина автора которого делится на 3.");
+        bookList.add(bookAuthorThree); // добавляем хотя бы одну книгу, длина имени автора которого делится на три
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getAuthor().length() % 3 == 0) {
+                System.out.println("bookList.get(" + i + ") = " + bookList.get(i));
+                break;
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("9. Возвращаем все элементы удовлетворяющие условию:");
+        System.out.println("а) Возвращаем все книги, длина автора которых делится на 3.");
+        bookList.add(bookAuthorSix); // добавляем ещё одну книгу, длина имени автора которого делится на три
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getAuthor().length() % 3 == 0) {
+                System.out.println("bookList.get(" + i + ") = " + bookList.get(i));
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("10. Создать класс Person.( Поля: имя, возраст и пол isMale )");
+        System.out.println("Вернуть всех военнообязанных мужчин (пол), которым меньше 27 и больше 18 и имя которых начинается на 'Н'");
+
+        Person igor = new Person("Игорь", 18, true);
+        Person petr = new Person("Пётр", 28, true);
+        Person nicolay = new Person("Николай", 23, true);
+        Person nadya = new Person("Надя", 23, false);
+        Person nikita = new Person("Никита", 29, true);
+        Person anna = new Person("Анна", 54, false);
+        Person nestor = new Person("Нестор", 19, true);
+        Person nina = new Person("Нина", 26, false);
+        Person nicolay2 = new Person("Николай", 17, true);
+
+        List<Person> personList = new ArrayList<>(Arrays.asList(igor, petr, nicolay, nadya, nikita, anna, nestor, nina, nicolay2));
+
+        for (Person personElem : personList) {
+            if (personElem.isMale() && personElem.getAge() >= 18 && personElem.getAge() < 27 && personElem.getName().startsWith("Н")) {
+                System.out.println(personElem);
+            }
+        }
+
+        System.out.println("*******************************");
+        System.out.println("11. Найти средний возраст всех женщин.");
+        int sumOfAllAges = 0;
+        int femaleCount = 0;
+        for (Person personElem : personList) {
+            if (!personElem.isMale()) {
+                femaleCount++;
+                sumOfAllAges = sumOfAllAges + personElem.getAge();
+            }
+        }
+        System.out.println("Average age of all woman = " + sumOfAllAges / femaleCount);
 
 
     }

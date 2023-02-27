@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Класс Person должен: ")
 public class PersonTest {
@@ -54,13 +53,19 @@ public class PersonTest {
     @Test
     public void shouldHaveCorrectTakeBeerMethod() {
         Person actualPerson = new Person(DEFAULT_NAME, DEFAULT_AGE);
-        if (DEFAULT_AGE < 18) {
-            assertAll("actualPerson",
-                    () -> assertEquals(false, actualPerson.takeBeer()));
-        } else
-            assertAll("actualPerson",
-                    () -> assertEquals(true, actualPerson.takeBeer()));
-    }
+        Person adultPerson = new Person(NEW_NAME, NEW_AGE);
+
+        // Исправлено:
+        assertTrue(adultPerson.takeBeer());
+        assertFalse(actualPerson.takeBeer());
+
+//        if (DEFAULT_AGE < 18) {
+//            assertAll("actualPerson",
+//                    () -> assertEquals(false, actualPerson.takeBeer()));
+//        } else
+//            assertAll("actualPerson",
+//                    () -> assertEquals(true, actualPerson.takeBeer()));
+  }
 
     @DisplayName("Корректно выводить сообщение ToString")
     @Test

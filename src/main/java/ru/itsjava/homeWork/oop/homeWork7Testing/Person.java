@@ -18,6 +18,6 @@ public class Person {
 
     // Проверка возраста на 18
     public boolean takeBeer() {
-        return age > 18;
+        return age >= 18;
     }
 }
