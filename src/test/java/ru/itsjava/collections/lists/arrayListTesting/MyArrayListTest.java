@@ -119,13 +119,13 @@ public class MyArrayListTest {
         System.out.println("list = " + list);
         // Базовый список. Состоит из 10 элементов
         assertEquals(10, list.size());
-        // Добавляем тестовый объект по индексу 1
+        // Добавляем тестовый объект по индексу 0
         list.add(0, TEST_OBJECT);
         // Список должен увеличиться на 1 элемент
         assertEquals(11, list.size());
         // В списке должен быть добавленный объект
         assertTrue(list.contains(TEST_OBJECT));
-        // В списке добавленный объект должен находиться по индексу 1
+        // В списке добавленный объект должен находиться по индексу 0
         assertEquals(0, list.indexOf(TEST_OBJECT));
         // Остальной массив должен сохранить свой порядок
         assertEquals(10, list.indexOf("Obj10"));
