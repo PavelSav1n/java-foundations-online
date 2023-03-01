@@ -1,29 +1,41 @@
 package ru.itsjava.collections.lists.arrayList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyArrayListPractice {
     public static void main(String[] args) {
         MyArrayList list = new MyArrayList();
+
+        // Пустой список:
         System.out.println(list.size());
+        list.add("Privet0");
+        list.add("Privet1");
+        list.add("Privet2");
+        list.add("Privet3");
+        list.add("Privet4");
+        list.add("Privet4");
+        list.add("Privet4");
+        list.add("Privet5");
+        list.add("Privet6");
+        list.get(0);
 
-        System.out.println("list.isEmpty() = " + list.isEmpty());
-        list.add("Privet");
-        list.add("Privet");
-        list.add("Privet");
-        list.add("Privet");
-        System.out.println("list.isEmpty() = " + list.isEmpty());
-        System.out.println("list.size() = " + list.size());
-        System.out.println();
-        System.out.println("list.contains(\"Privet\") = " + list.contains("Privet"));
-        System.out.println("list.contains(\"Privet2\") = " + list.contains("Privet2"));
+        // Первый элемент
+        list.add(0, "test");
+        System.out.println("list = " + list);
+        // Середина
+        list.add(5, "test");
+        System.out.println("list = " + list);
+        // Последний элемент
+        list.add(list.size()-1, "test");
+        System.out.println("list = " + list);
 
-        list.clear();
-        System.out.println("list.isEmpty() = " + list.isEmpty());
-        System.out.println("list.size() = " + list.size());
+        System.out.println("list.indexOf(\"Privet0\") = " + list.indexOf("test"));
 
-        list.add("Privet");
-        System.out.println("list.isEmpty() = " + list.isEmpty());
-        System.out.println("list.size() = " + list.size());
-        System.out.println("list.contains(\"Privet\") = " + list.contains("Privet"));
-        System.out.println("list.contains(\"Privet2\") = " + list.contains("Privet2"));
+        System.out.println("list.lastIndexOf(\"test\") = " + list.lastIndexOf("test"));
+        System.out.println("list.lastIndexOf(\"Privet4\") = " + list.lastIndexOf("Privet4"));
+        System.out.println("list.lastIndexOf(\"Privet43\") = " + list.lastIndexOf("Privet43"));
+
+
     }
 }
