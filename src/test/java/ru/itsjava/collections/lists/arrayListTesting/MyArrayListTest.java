@@ -9,12 +9,27 @@ public class MyArrayListTest {
 
     public static final String DEFAULT_OBJECT = "TestObject";
     public static final String TEST_OBJECT = "TestObject";
+    public static final String OTHER_OBJECT = "OtherObject";
     public static final String WRONG_OBJECT = "WrongObject";
 
     @Test
+    //public int size()
+    public void shouldHaveCorrectSizeMethod() {
+        MyArrayList list = new MyArrayList();
+        // Пусто список, размер должен быть 0:
+        assertEquals(0, list.size());
+        // Добавляем элемент в список, размер должен стать 1
+        list.add("Obj1");
+        assertEquals(1, list.size());
+        // Удаляем элемент, размер снова должен стать 0:
+        list.remove(0);
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    // public boolean isEmpty()
     public void shouldHaveCorrectIsEmptyMethod() {
         MyArrayList list = new MyArrayList();
-
         // Пустой список, пока ничего не добавили
         assertTrue(list.isEmpty());
         list.add(DEFAULT_OBJECT);
@@ -23,26 +38,83 @@ public class MyArrayListTest {
     }
 
     @Test
+    // public boolean contains(Object o)
+    // Возвращает true, если список содержит искомый объект и false в ином случае
     public void shouldHaveCorrectContainsMethod() {
         MyArrayList list = new MyArrayList();
-
         // Пустой список, пока ничего не добавили должно быть false:
         assertFalse((list.contains(TEST_OBJECT)));
         list.add(DEFAULT_OBJECT);
         // Добавили элемент, сравниваем с таким же тестовым объектом
         assertTrue(list.contains(TEST_OBJECT));
         // Сравниваем на наличие другого объекта:
-        assertFalse(list.contains(WRONG_OBJECT));
+        assertFalse(list.contains(OTHER_OBJECT));
         // Добавляем другой объект, сравниваем наличие:
-        list.add(WRONG_OBJECT);
-        assertTrue(list.contains(WRONG_OBJECT));
+        list.add(OTHER_OBJECT);
+        assertTrue(list.contains(OTHER_OBJECT));
+    }
+
+    @Test
+    // public boolean add(Object o)
+    // Добавляет указанный объект в конец списка
+    // Возвращает true, если успешно добавили
+    public void shouldHaveCorrectAddMethod() {
+        MyArrayList list = new MyArrayList();
+        // Пустой список -- не содержит элементов
+        assertEquals(0, list.size());
+        // Добавляем объект в список, проверяем успешно ли добавился:
+        assertTrue(list.add(TEST_OBJECT));
+        // Длина списка увеличилась на 1:
+        assertEquals(1, list.size());
+        // Проверяем, находится ли именно наш объект в списке:
+        assertEquals(TEST_OBJECT, list.get(0));
+        // Добавляем ещё один объект, проверяем, добавился ли он в конец списка:
+        assertTrue(list.add(OTHER_OBJECT));
+        assertEquals(2, list.size());
+        assertEquals(OTHER_OBJECT, list.get(1));
+    }
+
+    @Test
+    // public boolean remove(Object o)
+    // Метод удаляет указанный объект и возвращает true, если нашли и удалили
+    // false, если указанный объект не найден
+    public void shouldHaveCorrectRemoveMethod() {
+        // Создаём и наполняем тестовый список:
+        MyArrayList list = new MyArrayList();
+        for (int i = 1; i < 11; i++) {
+            list.add("Obj" + i);
+        }
+        // Список выглядит как набор из десяти объектов Obj1, Obj2, ... Obj10:
+        System.out.println("list before remove() test = " + list);
+        // Список из 10 элементов
+        assertEquals(10, list.size());
+        // Удаляем начальный элемент.
+        assertTrue(list.remove("Obj1"));
+        // Должно стать 9 элементов:
+        assertEquals(9, list.size());
+        // Удалённого элемента нет:
+        assertFalse(list.contains("Obj1"));
+        // Удаляем элемент в середине:
+        assertTrue(list.remove("Obj5"));
+        // Должно стать 8 элементов:
+        assertEquals(8, list.size());
+        // Удалённого элемента нет:
+        assertFalse(list.contains("Obj5"));
+        // Удаляем элемент в конце:
+        assertTrue(list.remove("Obj10"));
+        // Должно стать 7 элементов:
+        assertEquals(7, list.size());
+        // Удалённого элемента нет:
+        assertFalse(list.contains("Obj10"));
+        // Удаляем несуществующий элемент:
+        assertFalse(list.remove(WRONG_OBJECT));
+        System.out.println("list after remove() test = " + list);
     }
 
     @Test
     // public void clear()
     public void shouldHaveCorrectClearMethod() {
         MyArrayList list = new MyArrayList();
-
         // Пустой список. Пока true:
         assertTrue(list.isEmpty());
         // Очищаем пустой список. Должно быть true:
@@ -186,4 +258,15 @@ public class MyArrayListTest {
         // Пытаемся получить несуществующий индекс. Будет ошибка ArrayIndexOutOfBoundsException
         // list.get(99);
     }
+
+    @Test
+    public void shouldHaveCorrectToStringMethod() {
+        MyArrayList list = new MyArrayList();
+        list.add(TEST_OBJECT);
+        assertEquals("MyArrayList{TestObject }", list.toString());
+        list.add(OTHER_OBJECT);
+        assertEquals("MyArrayList{TestObject OtherObject }", list.toString());
+
+    }
 }
+
