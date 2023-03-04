@@ -117,6 +117,13 @@ public class MyArrayList {
         realSize++;
     }
 
+    // CTRL + ALT + M -- refactor selected code
+    private void checkIndex(int index) {
+        if (!isCorrectIndex(index)) {
+            throw new ArrayIndexOutOfBoundsException("Некорректный индекс");
+        }
+    }
+
     private boolean isCorrectIndex(int index) {
         if ((index > -1) && (index < realSize)) {
             return true;
@@ -136,13 +143,6 @@ public class MyArrayList {
         return resElement;
     }
 
-    // CTRL + ALT + M -- refactor selected code
-    private void checkIndex(int index) {
-        if (!isCorrectIndex(index)) {
-            throw new ArrayIndexOutOfBoundsException("Некорректный индекс");
-        }
-    }
-
     public int indexOf(Object o) {
         for (int i = 0; i < realSize; i++) {
             if (array[i] != null && array[i].equals(o)) {
@@ -153,7 +153,7 @@ public class MyArrayList {
     }
 
     public int lastIndexOf(Object o) {
-        for (int i = array.length - 1; i > 0; i--) {
+        for (int i = realSize - 1; i > 0; i--) {
             if (array[i] != null && array[i].equals(o))
                 return i;
         }

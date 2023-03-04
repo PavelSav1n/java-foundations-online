@@ -75,16 +75,69 @@ public class MyLinkedList {
         return false;
     }
 
+    // Варианты:
+    // СТРОКА1 -> null
+    // СТРОКА1 -> СТРОКА2 -> null
+    // СТРОКА1 -> СТРОКА2 -> СТРОКА3 -> null
     public void clear() {
-
+        // Проверяем, есть ли список
+        if (head != null) {
+            // Если список не пустой, затираем значение начального узла
+            head.setValue(null);
+            // Если это не конец списка
+            if (head.getNext() != null) {
+                // Создаём указатель на текущий узел:
+                Node curNode = head;
+                Node prevNode = head;
+                // Пока это не конечный узел, идём по узлам
+                while (curNode.getNext() != null) {
+                    // Перемещаем указатель на следующий узел:
+                    curNode = curNode.getNext();
+                    // Затираем данные узла:
+                    curNode.setValue(null);
+                    // Затираем ссылку на этот узел в предыдущем:
+                    prevNode.setNext(null);
+                }
+            }
+            // Конец списка. Обnullяем список:
+            head = null;
+        }
     }
+
 
     public Object get(int index) {
-        return null;
+        // Проверяем индекс и на непустой список:
+        checkIndex(index);
+        // Cоздаём указатель и счётчик узлов
+        Node curNode = head;
+        int nodeCount;
+        // Идём по списку до тех пор, пока счётчик узлов не сравняется с индексом
+        for (nodeCount = 0; nodeCount != index; nodeCount++) {
+            curNode = curNode.getNext();
+        }
+        return curNode.getValue();
     }
 
+    // Варианты:
+    // СТРОКА1 -> null
+    // СТРОКА1 -> СТРОКА2 -> null
+    // СТРОКА1 -> СТРОКА2 -> СТРОКА3 -> null
     public Object set(int index, Object element) {
-        return null;
+        // Проверяем индекс и на непустой список:
+        checkIndex(index);
+        // Cоздаём указатель и счётчик узлов
+        Node curNode = head;
+        int nodeCount;
+        // Идём по списку до тех пор, пока счётчик узлов не сравняется с индексом
+        for (nodeCount = 0; nodeCount != index; nodeCount++) {
+            curNode = curNode.getNext();
+        }
+        // Как только нашли элемент по индексу, создаём переменную, где будем хранить удаляемый элемент для возврата
+        Object deletedElement = curNode.getValue();
+        // Вставляем новый элемент
+        curNode.setValue(element);
+        return deletedElement;
+
     }
 
     public void add(int index, Object element) {
