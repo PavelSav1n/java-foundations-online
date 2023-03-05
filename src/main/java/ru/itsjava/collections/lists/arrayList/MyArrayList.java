@@ -78,8 +78,12 @@ public class MyArrayList {
     }
 
     public void clear() {
-        array = new Object[DEFAULT_CAPACITY];
-        realSize = 0;
+        // Бежим по всему массиву и обnullяем данные:
+        for (int i = 0; i < realSize; i++) {
+            array[i] = null;
+        }
+        // После чего создаём список по умолчанию:
+        new MyArrayList();
     }
 
     public Object get(int index) {
@@ -109,9 +113,7 @@ public class MyArrayList {
             array = resArray;
         }
         // Смещаем массив вправо на 1 элемент
-        for (int i = array.length - 1; i > index; i--) {
-            array[i] = array[i - 1];
-        }
+        if (array.length - 1 - index >= 0) System.arraycopy(array, index, array, index + 1, array.length - 1 - index);
         // Вставка входящего эелемента по индексу
         array[index] = element;
         realSize++;
