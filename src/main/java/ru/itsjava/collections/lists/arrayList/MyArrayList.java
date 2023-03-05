@@ -83,7 +83,8 @@ public class MyArrayList {
             array[i] = null;
         }
         // После чего создаём список по умолчанию:
-        new MyArrayList();
+        array = new Object[DEFAULT_CAPACITY];
+        realSize = 0;
     }
 
     public Object get(int index) {
