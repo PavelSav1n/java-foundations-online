@@ -72,7 +72,39 @@ public class MyLinkedList {
     }
 
     public boolean remove(Object o) {
-        return false;
+        // Если начальный узел не инициализирован, значит список пустой, возвращаем false
+        if (head == null) return false;
+        // Если список не пуст, проверяем начальный узел по значению.
+        if (head.getValue().equals(o)) {
+            // Если совпадает, перемещаем указатель начального узла на следующий элемент
+            // (при этом содержимое удаляемого элемента не затирается, т.к. двигается лишь указатель списка)
+            head = head.getNext();
+            // Возвращаем true об успешном удалении
+            return true;
+        }
+        // Если объект первого элемент не равен искомому объекту и это конец списка, возвращаем false
+        if (head.getNext() == null) return false;
+        // Если список имеет продолжение, создаём указатели на текущий и предыдущий узел:
+        Node curNode = head;
+        Node prevNode = head;
+        // Ищем по списку узел, содержащий объект, равный искомому до конца списка:
+        while ((curNode = curNode.getNext()) != null) {
+            if (curNode.getValue().equals(o)) {
+                // Если нашли, то имеем пару curNode и prevNode, указывающие на текущий узел с удаляемыми данными и предыдущий
+                break;
+            }
+            // Перемещаем указатель предыдущего нода после break, чтобы иметь пару указывающие не на один и тот же узел
+            prevNode = prevNode.getNext();
+        }
+        // Проверка, на случай, если мы дошли до конца списка и не нашли удаляемый объект.
+        // В этом случае curNode и prevNode будут указывать на null. Возвращаем false.
+        if (curNode == null) return false;
+        // Если удаляемый объект найден, переназначаем ссылку предыдущего узла на узел, стоящий после текущего
+        prevNode.setNext(curNode.getNext());
+        // Обnullяем ссылку текущего узла.
+        curNode.setNext(null);
+        // Репортим успех:
+        return true;
     }
 
     // Варианты:
@@ -141,7 +173,31 @@ public class MyLinkedList {
     }
 
     public void add(int index, Object element) {
-
+        // Проверяем входящий индекс. Должен быть в рамках size() нашего односвязного списка
+        // Тут же мы убеждаемся, что список не пустой (внутри вызывается size() где происходит проверка head != null)
+        checkIndex(index);
+        // Если вставляем на место первого элемента
+        if (index == 0) {
+            head = new Node(element, head);
+        } else {
+            // Если в списке больше одного элемента, создаём указатели и счётчик
+            Node curNode = head;
+            Node prevNode = head;
+            int nodeCount = 0;
+            // Бежим до конца списка
+            while ((curNode = curNode.getNext()) != null) {
+                nodeCount++;
+                // до тех пор, пока счётчик не сравняется с искомым индексом
+                if (nodeCount == index) {
+                    break;
+                }
+                prevNode = prevNode.getNext();
+            }
+            // Создаём новый узел, указывающий на текущий
+            Node newNode = new Node(element, curNode);
+            // Предыдущему меняем указатель на новый узел
+            prevNode.setNext(newNode);
+        }
     }
 
     // Варианты:
@@ -190,6 +246,10 @@ public class MyLinkedList {
             // Если ещё нет, то перемещаем указатель на предыдущий узел в текущий.
             prevNode = prevNode.getNext();
         }
+        // Проверка, на случай, если мы дошли до конца списка и не нашли удаляемый объект.
+        // В этом случае curNode и prevNode будут указывать на null. Возвращаем null, чтобы избежать NullPointerException в curNode.getValue();
+        if (curNode == null) return null;
+
         // Как только мы получили искомую пару, можно создать переменную, в которой будем хранить данные из удаляемого узла:
         Object resValue = curNode.getValue();
 
@@ -208,11 +268,62 @@ public class MyLinkedList {
     }
 
     public int indexOf(Object o) {
-        return 0;
+        // Если список пуст, то возвращаем провал операции:
+        if (head == null) return -1;
+        // Если искомый объект находится в первом узле
+        if (head.getValue().equals(o)) {
+            // Если значения совпали, возвращаем индекс 0
+            return 0;
+        }
+        // Если дальше, создаём указатель:
+        Node curNode = head;
+        // Создаём счётчик индекса
+        int nodeIndex = 0;
+        // Идём до конца списка
+        while ((curNode = curNode.getNext()) != null) {
+            // каждый цикл увеличиваем индекс на 1
+            nodeIndex++;
+            // Если нашли в узле искомый объект, выходим из цикла
+            if (curNode.getValue().equals(o)) {
+                break;
+            }
+        }
+        // Если дошли до конца и не нашли искомый объект, возвращаем провал:
+        if (curNode == null) return -1;
+
+        // Если нашли, возвращаем индекс:
+        return nodeIndex;
     }
 
     public int lastIndexOf(Object o) {
-        return 0;
+        // Если список пуст, то возвращаем провал операции:
+        if (head == null) return -1;
+        // Создаём счётчик индекса
+        int nodeIndex = 0;
+        // Создаём переменную, в которой будем хранить индекс последнего совпавшего узла:
+        int lastNodeIndex = -1;
+        // Проверяем, совпадает ли с искомым объектом содержимое начального узла
+        if (head.getValue().equals(o)) {
+            // Если значения совпали, присваиваем переменной последнего индекса текущий индекс
+            lastNodeIndex = nodeIndex;
+        }
+        // Проверяем, есть ли у списка продолжение:
+        if (head.getNext() != null) {
+            // Создаём указатель:
+            Node curNode = head;
+            // Идём до конца списка
+            while ((curNode = curNode.getNext()) != null) {
+                // каждый цикл увеличиваем индекс на 1
+                nodeIndex++;
+                // Если нашли в узле искомый объект, присваиваем переменной последнего индекса текущий индекс
+                if (curNode.getValue().equals(o)) {
+                    lastNodeIndex = nodeIndex;
+                }
+            }
+        }
+        // Если совпадений не нашли, то lastNodeIndex равен -1
+        // Если нашли, то он соответствует соответствующему индексу
+        return lastNodeIndex;
     }
 
     @Override

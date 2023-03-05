@@ -10,14 +10,10 @@ public class MyLinkedListPractice {
         list.add("row3");
         list.add("row4");
         list.add("row5");
-        // метод Object get(int index)
-        System.out.println("list.get(0) = " + list.get(0));
+
+        list.add(5, "NEW5");
         System.out.println("list = " + list);
-        // метод Object set(int index, Object element)
-        System.out.println("list.set(2,\"TEST\") = " + list.set(5, "TEST"));
-        System.out.println("list = " + list);
-        // очистка списка
-//        list.clear();
-//        System.out.println("list = " + list);
+
+
     }
 }
