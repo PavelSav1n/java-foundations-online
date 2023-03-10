@@ -47,9 +47,9 @@ public class IOStreamsPractice {
             fileNotFoundException.printStackTrace();
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String input;
-            while ((input = bufferedReader.readLine()) != null) {
+            while ((input = reader.readLine()) != null) {
                 System.out.println("bufferedReader.readLine() = " + input);
             }
         } catch (IOException e) {
