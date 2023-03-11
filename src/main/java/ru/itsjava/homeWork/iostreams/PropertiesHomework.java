@@ -8,7 +8,7 @@ public class PropertiesHomework {
 
     public static void main(String[] args) throws IOException {
 
-        // Для загрузки файла без относительной ссылки не файл создаём ClassLoader
+        // Для загрузки файла без относительной ссылки на файл создаём ClassLoader
         ClassLoader classLoader = PropertiesHomework.class.getClassLoader();
         // После чего в этом ClassLoader вызываем метод getResourceAsStream и указываем, какой файл нам нужно считать и пихаем в переменную inputStream
         InputStream inputStream = classLoader.getResourceAsStream("app.properties");
