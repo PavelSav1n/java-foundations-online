@@ -27,6 +27,6 @@ public class RunnableThreadHomework {
         thread2.setDaemon(true);
         // Стартуем
         thread2.start();
-        // thread2 будет запущен в JVM ещё 5*4 сек после завершения потока main
+        // thread2 будет работать в JVM ещё 5*4 сек после завершения потока main
     }
 }
