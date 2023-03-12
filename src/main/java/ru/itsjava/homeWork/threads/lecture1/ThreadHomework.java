@@ -1,4 +1,4 @@
-package ru.itsjava.homeWork.threads;
+package ru.itsjava.homeWork.threads.lecture1;
 
 import java.util.Scanner;
 
