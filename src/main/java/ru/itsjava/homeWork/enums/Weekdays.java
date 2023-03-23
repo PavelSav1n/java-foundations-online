@@ -2,8 +2,8 @@ package ru.itsjava.homeWork.enums;
 
 // Перечисление. Набор объектов
 public enum Weekdays {
-    ПОНЕДЕЛЬНИК("monday"), ВТОРНИК("tuesday"), СРЕДА("wednesday"),
-    ЧЕТВЕРГ("thursday"), ПЯТНИЦА("friday"), СУББОТА("saturday"), ВОСКРЕСЕНЬЕ("sunday");
+    MONDAY("ПОНЕДЕЛЬНИК"), TUESDAY("ВТОРНИК"), WEDNESDAY("СРЕДА"),
+    THURSDAY("ЧЕТВЕРГ"), FRIDAY("ПЯТНИЦА"), SATURDAY("СУББОТА"), SUNDAY("ВОСКРЕСЕНЬЕ");
 
     private final String translation;
 
