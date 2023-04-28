@@ -34,6 +34,7 @@ public class MapPractice {
         System.out.println(" -------пробежаться по хэшмапе с помощью только ключей --------- ");
         // foreach
         for (Man keyMan : men.keySet()){    // получить по ключу значение ключа
+
             System.out.println(keyMan+ ": " + men.get(keyMan));
         }
 

@@ -1,4 +1,7 @@
-package ru.itsjava.threads;
+package ru.itsjava.threads.lecture1;
+
+import ru.itsjava.homeWork.threads.lecture1.PrinterRunnable;
+import ru.itsjava.homeWork.threads.lecture1.PrinterThread;
 
 public class ThreadPractice {
 
