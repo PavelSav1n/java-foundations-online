@@ -48,7 +48,7 @@ public class MyJUnit {
                 System.out.println(elemMethod.getName() + " FAILED!");
                 failCount++;
             }
-            if (afterMethods.size() > 0) { // проверяем, есть ли @After методы. Если есть, выполняем сначала их
+            if (afterMethods.size() > 0) { // проверяем, есть ли @After методы. Если есть, выполняем их
                 for (Method elemAfterMethod : afterMethods) {
                     displayNameAnnotation(elemAfterMethod);
                     elemAfterMethod.invoke(objTestClass);
