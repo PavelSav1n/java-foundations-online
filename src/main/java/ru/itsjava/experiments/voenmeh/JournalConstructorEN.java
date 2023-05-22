@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JournalConstructor {
+public class JournalConstructorEN {
     public static void main(String[] args) {
         for (int articleNum = 1; articleNum <= 12; articleNum++) {
 
 
-            File file = new File("src/main/resources/2023-05-19-article-" + articleNum);
+            File file = new File("src/main/resources/voenmeh/en/2023-05-19-article-en-" + articleNum);
             HashMap<String, String> journalArray = new HashMap<>();
             ArrayList<String> authorsArray = new ArrayList<>();
             ArrayList<String> workplace = new ArrayList<>();
@@ -38,7 +38,9 @@ public class JournalConstructor {
                     System.out.println("Row:" + rowCount++);
 
                     // Парсим авторов из тела журнала:
-                    Pattern pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+[123456]");
+                    // RegEx парсит только "И. О. Фамилия1" включая киррилицу и латиницу вперемешку.
+                    // TODO Добавить сопоставление ссылки и workplace. Сейчас костыль.
+                    Pattern pattern = Pattern.compile("([A-Z]|[А-Я])\\.\\s+([A-Z]|[А-Я])\\.\\s(([A-Z]|[А-Я])|([a-z]|[а-я]))+[123456]");
                     Matcher matcher = pattern.matcher(input);
                     while (matcher.find()) {
                         System.out.println(matcher.group());
@@ -50,7 +52,7 @@ public class JournalConstructor {
                         // Парсим место работы авторов
                         if (input.startsWith("¹")) {
                             StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
+                            while (!input.contains("Russian Federation")) {
                                 body.append(input);
                                 input = reader.readLine();
                                 System.out.println("Row:" + rowCount++);
@@ -59,7 +61,7 @@ public class JournalConstructor {
                         }
                         if (input.startsWith("²")) {
                             StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
+                            while (!input.contains("Russian Federation")) {
                                 body.append(input);
                                 input = reader.readLine();
                                 System.out.println("Row:" + rowCount++);
@@ -68,7 +70,7 @@ public class JournalConstructor {
                         }
                         if (input.startsWith("³")) {
                             StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
+                            while (!input.contains("Russian Federation")) {
                                 body.append(input);
                                 input = reader.readLine();
                                 System.out.println("Row:" + rowCount++);
@@ -77,7 +79,8 @@ public class JournalConstructor {
                         }
                     } else if (findFlag != 2) {
                         // Парсим авторов из тела журнала:
-                        pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+");
+                        // RegEx парсит только "И. О. Фамилия" включая киррилицу и латиницу вперемешку.
+                        pattern = Pattern.compile("([A-Z]|[А-Я])\\.\\s+([A-Z]|[А-Я])\\.\\s(([A-Z]|[А-Я])|([a-z]|[а-я]))+");
                         matcher = pattern.matcher(input);
                         while (matcher.find()) {
                             System.out.println(matcher.group());
@@ -87,9 +90,9 @@ public class JournalConstructor {
                     }
                     if (findFlag == 2) {
                         System.out.println("Пишем БГТУ");
-                        if (input.startsWith("Балтийский государственный")) {
+                        if (input.startsWith("Baltic State")) {
                             StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
+                            while (!input.contains("Russian Federation")) {
                                 body.append(input);
                                 input = reader.readLine();
                                 System.out.println("Row:" + rowCount++);
@@ -101,9 +104,9 @@ public class JournalConstructor {
                     }
 
                     // Парсим аннотацию:
-                    if (input.startsWith("Аннотация.")) {
+                    if (input.startsWith("Abstract.")) {
                         StringBuilder body = new StringBuilder();
-                        while (!input.contains("Ключевые слова:")) {
+                        while (!input.contains("Keywords:")) {
                             body.append(input).append(" ");
                             input = reader.readLine();
                             System.out.println("Row:" + rowCount++);
@@ -111,9 +114,9 @@ public class JournalConstructor {
                         annotation = body.toString();
                     }
                     // Парсим ключевые слова:
-                    if (input.startsWith("Ключевые слова:")) {
+                    if (input.startsWith("Keywords:")) {
                         StringBuilder body = new StringBuilder();
-                        while (!input.contains("Для цитирования:")) {
+                        while (!input.contains("For citation:")) {
                             body.append(input).append(" ");
                             input = reader.readLine();
                             System.out.println("Row:" + rowCount++);
@@ -173,6 +176,7 @@ public class JournalConstructor {
             // Второй проход, парсим заголовок:
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String input;
+                StringBuilder body = new StringBuilder();
 
                 System.out.println("Второй проход");
                 int rowCount = 1;
@@ -181,18 +185,24 @@ public class JournalConstructor {
                     System.out.println(input);
                     System.out.println("Row:" + rowCount++);
 
-                    if (input.startsWith("Для цитирования:")) {
-                        StringBuilder body = new StringBuilder();
-                        if (input.contains("//")) {
-                            journalArray.put("Заголовок", body.append(input.substring(17).split("//")[0].trim()).toString());
-                        } else {
+                    if (input.startsWith("For citation:")) {
+                        // В RU версии тут используется while !input.contains("//")
+                        // В EN // нет, поэтому сначала собираем строку до самого конца с мусором, потом разбираем по слову Aerospace Engineering
+                        while (input != null) {
                             body.append(input).append(" ");
-                            input = reader.readLine();
-                            journalArray.put("Заголовок", body.substring(17) + input.split("//")[0].trim());
-                        }
+                            try {
+                                input = reader.readLine();
+                            } catch (IOException e) {
+                                System.err.println("Дошли до конца!");
+                            }
 
+                        }
+                        System.out.println("body = " + body);
+                        // Собранную строку режем и кладём в мапу:
+                        journalArray.put("Заголовок", body.toString().split("Aerospace Engineering")[0].trim().substring(14));
                     }
                 }
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -210,11 +220,12 @@ public class JournalConstructor {
             File fileOutput = new File(file.getPath() + ".out");
             try (PrintWriter printWriter = new PrintWriter(fileOutput)) {
 
-                Pattern pattern = Pattern.compile("[А-Я][а-я].+\\s+[А-Я]\\.\\s+[А-Я]\\.");
+                Pattern pattern = Pattern.compile("(([A-Z]|[А-Я])([a-z]|[а-я])).+\\s+([A-Z]|[А-Я])\\.\\s+([A-Z]|[А-Я])\\.");
                 Matcher matcher = pattern.matcher(journalArray.get("Заголовок"));
                 while (matcher.find()) {
                     String groupOfAuthors = matcher.group();
-                    String title = journalArray.get("Заголовок").split("[А-Я][а-я].+\s+[А-Я]\\.\s+[А-Я]\\.")[1].strip();
+                    System.out.println("matcher.group() = " + matcher.group());
+                    String title = journalArray.get("Заголовок").split("(([A-Z]|[А-Я])([a-z]|[а-я])).+\\s+([A-Z]|[А-Я])\\.\\s+([A-Z]|[А-Я])\\.")[1].strip();
                     printWriter.println("[expand title=\"<b>" + groupOfAuthors + "</b> " + title + "\"]");
                 }
                 printWriter.println();
@@ -243,9 +254,9 @@ public class JournalConstructor {
                     printWriter.println();
                 }
                 printWriter.println();
-                printWriter.println("<b>Аннотация:</b> " + annotation.substring(11));
+                printWriter.println("<b>Abstract:</b> " + annotation.substring(10));
                 printWriter.println();
-                printWriter.println("<b>Ключевые слова:</b> " + keywords.substring(16));
+                printWriter.println("<b>Keywords:</b> " + keywords.substring(10));
                 printWriter.println("[/expand]");
 
             } catch (FileNotFoundException e) {
