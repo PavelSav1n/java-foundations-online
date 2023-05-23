@@ -196,6 +196,30 @@ public class JournalConstructorRU {
                 throw new RuntimeException(e);
             }
 
+            // Третий проход. Добавляем информацию для цитирования.
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String input;
+
+                System.out.println("Третий проход");
+                int rowCount = 1;
+                while ((input = reader.readLine()) != null) {
+                    StringBuilder body = new StringBuilder();
+                    System.out.println(input);
+                    System.out.println("Row:" + rowCount++);
+
+                    if (input.startsWith("Для цитирования:")) {
+                        while (input != null){
+                            body.append(input).append(" ");
+                            input = reader.readLine();
+                        }
+//                        journalArray.put("Заголовок", body.substring(17) + input.split("//")[0].trim());
+                        journalArray.put("Для цитирования", body.toString().trim().substring(17));
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
 //        // Парсим авторов из заголовка expand:
 //        String authors = journalArray.get("[expand title=\"");
 //        // [А-Я][а-я]+\s+[А-Я]\.\s+[А-Я]\.
@@ -245,6 +269,12 @@ public class JournalConstructorRU {
                 printWriter.println("<b>Аннотация:</b> " + annotation.substring(11));
                 printWriter.println();
                 printWriter.println("<b>Ключевые слова:</b> " + keywords.substring(16));
+                printWriter.println();
+                printWriter.println("<b>Для цитирования: </b>" + journalArray.get("Для цитирования"));
+                printWriter.println();
+                printWriter.println("<div class=\"wp-block-buttons\"><!-- wp:button {\"style\":{\"border\":{\"radius\":\"0px\"},\"color\":{\"background\":\"#0077c8\"},\"typography\":{\"textTransform\":\"uppercase\",\"fontStyle\":\"normal\",\"fontWeight\":\"800\"}},\"className\":\"is-style-fill\",\"fontSize\":\"medium\"} -->\n" +
+                        "<div class=\"wp-block-button has-custom-font-size is-style-fill has-medium-font-size\" style=\"font-style:normal;font-weight:800;\"><a class=\"wp-block-button__link has-background wp-element-button\" href=\"http://aerocosmtech.ru/wp-content/uploads/2023/05/PDF-Том-1-выпуск-1-2023-"+ articleNum +"-ст.pdf\" style=\"border-radius:0px;background-color:#0077c8;padding: 0 15px 0 15px;font-weight: 600;font-size: 12px;line-height: 40px;\">Скачать статью</a></div>\n" +
+                        "<!-- /wp:button --></div>");
                 printWriter.println("[/expand]");
 
             } catch (FileNotFoundException e) {
