@@ -1,5 +1,7 @@
 package ru.itsjava.experiments.voenmeh;
 
+import ru.itsjava.experiments.voenmeh.parsers.AuthorParserRu;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,10 +11,10 @@ import java.util.regex.Pattern;
 
 public class JournalConstructorRU {
     public static void main(String[] args) {
-        for (int articleNum = 1; articleNum <= 12; articleNum++) {
+        for (int articleNum = 1; articleNum <= 9; articleNum++) {
 
 
-            File file = new File("src/main/resources/voenmeh/ru/2023-05-19-article-" + articleNum);
+            File file = new File("src/main/resources/voenmeh/2/ru/2-" + articleNum);
             HashMap<String, String> journalArray = new HashMap<>();
             ArrayList<String> authorsArray = new ArrayList<>();
             ArrayList<String> workplace = new ArrayList<>();
@@ -37,68 +39,68 @@ public class JournalConstructorRU {
                 while ((input = reader.readLine()) != null) {
                     System.out.println("Row:" + rowCount++);
 
-                    // Парсим авторов из тела журнала:
-                    Pattern pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+[123456]");
-                    Matcher matcher = pattern.matcher(input);
-                    while (matcher.find()) {
-                        System.out.println(matcher.group());
-                        authorsArray.add(matcher.group());
-                        findFlag = 1;
-                        System.out.println("Нашли ссылки!");
-                    }
-                    if (findFlag == 1) {
-                        // Парсим место работы авторов
-                        if (input.startsWith("¹")) {
-                            StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
-                                body.append(input);
-                                input = reader.readLine();
-                                System.out.println("Row:" + rowCount++);
-                            }
-                            workplace.add(body + " " + input);
-                        }
-                        if (input.startsWith("²")) {
-                            StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
-                                body.append(input);
-                                input = reader.readLine();
-                                System.out.println("Row:" + rowCount++);
-                            }
-                            workplace.add(body + " " + input);
-                        }
-                        if (input.startsWith("³")) {
-                            StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
-                                body.append(input);
-                                input = reader.readLine();
-                                System.out.println("Row:" + rowCount++);
-                            }
-                            workplace.add(body + " " + input);
-                        }
-                    } else if (findFlag != 2) {
-                        // Парсим авторов из тела журнала:
-                        pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+");
-                        matcher = pattern.matcher(input);
-                        while (matcher.find()) {
-                            System.out.println(matcher.group());
-                            authorsArray.add(matcher.group());
-                            findFlag = 2;
-                        }
-                    }
-                    if (findFlag == 2) {
-                        System.out.println("Пишем БГТУ");
-                        if (input.startsWith("Балтийский государственный")) {
-                            StringBuilder body = new StringBuilder();
-                            while (!input.contains("Российская Федерация")) {
-                                body.append(input);
-                                input = reader.readLine();
-                                System.out.println("Row:" + rowCount++);
-                            }
-                            System.out.println(body + " " + input);
-                            workplace.add(body + " " + input);
-                            findFlag = 3;
-                        }
-                    }
+//                    // Парсим авторов из тела журнала:
+//                    Pattern pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+[123456]");
+//                    Matcher matcher = pattern.matcher(input);
+//                    while (matcher.find()) {
+//                        System.out.println(matcher.group());
+//                        authorsArray.add(matcher.group());
+//                        findFlag = 1;
+//                        System.out.println("Нашли ссылки!");
+//                    }
+//                    if (findFlag == 1) {
+//                        // Парсим место работы авторов
+//                        if (input.startsWith("¹")) {
+//                            StringBuilder body = new StringBuilder();
+//                            while (!input.contains("Российская Федерация")) {
+//                                body.append(input);
+//                                input = reader.readLine();
+//                                System.out.println("Row:" + rowCount++);
+//                            }
+//                            workplace.add(body + " " + input);
+//                        }
+//                        if (input.startsWith("²")) {
+//                            StringBuilder body = new StringBuilder();
+//                            while (!input.contains("Российская Федерация")) {
+//                                body.append(input);
+//                                input = reader.readLine();
+//                                System.out.println("Row:" + rowCount++);
+//                            }
+//                            workplace.add(body + " " + input);
+//                        }
+//                        if (input.startsWith("³")) {
+//                            StringBuilder body = new StringBuilder();
+//                            while (!input.contains("Российская Федерация")) {
+//                                body.append(input);
+//                                input = reader.readLine();
+//                                System.out.println("Row:" + rowCount++);
+//                            }
+//                            workplace.add(body + " " + input);
+//                        }
+//                    } else if (findFlag != 2) {
+//                        // Парсим авторов из тела журнала:
+//                        pattern = Pattern.compile("[А-Я]\\.\\s+[А-Я]\\.\\s[А-Я][а-я]+");
+//                        matcher = pattern.matcher(input);
+//                        while (matcher.find()) {
+//                            System.out.println(matcher.group());
+//                            authorsArray.add(matcher.group());
+//                            findFlag = 2;
+//                        }
+//                    }
+//                    if (findFlag == 2) {
+//                        System.out.println("Пишем БГТУ");
+//                        if (input.startsWith("Балтийский государственный")) {
+//                            StringBuilder body = new StringBuilder();
+//                            while (!input.contains("Российская Федерация")) {
+//                                body.append(input);
+//                                input = reader.readLine();
+//                                System.out.println("Row:" + rowCount++);
+//                            }
+//                            System.out.println(body + " " + input);
+//                            workplace.add(body + " " + input);
+//                            findFlag = 3;
+//                        }
+//                    }
 
                     // Парсим аннотацию:
                     if (input.startsWith("Аннотация.")) {
@@ -120,51 +122,37 @@ public class JournalConstructorRU {
                         }
                         keywords = body.toString();
                     }
-
-
                 }
-                System.out.println("Arrays.asList(journalArray) = " + Arrays.asList(journalArray));
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            System.out.println("**********");
-            System.out.println("workplace");
-            for (String s : workplace) {
-                System.out.println(s);
-            }
-            System.out.println("**********");
+            // Устарело
 
-            System.out.println("**********");
-            System.out.println("authorsArray");
-            for (String s : authorsArray) {
-                System.out.println(s);
-            }
-            System.out.println("**********");
-
-            // Совмещаем авторов и их место работы:
-            if (findFlag == 1) {
-                if (workplace.size() <= authorsArray.size()) { // Если у нас Авторов больше или столько же, сколько и мест работы
-                    for (int link = 1; link <= workplace.size(); link++) {
-                        for (int i = 0; i < authorsArray.size(); i++) {
-                            if (authorsArray.get(i).contains(Integer.toString(link))) {
-                                String newString = (authorsArray.get(i) + ", " + workplace.get(link - 1) // формируем одну строку
-                                ).replaceAll("[¹²³12345]", ""); // убираем ссылки
-//                    journalArray.put(authorsArray.get(i).replaceAll("[¹²³12345]", ""), workplace.get(link - 1).replaceAll("[¹²³12345]", ""));
-                                authorPlusWorkplace.add(newString); // добавляем автора и его работу в список
-                            }
-                        }
-                    }
-                } else { // Если у нас авторов меньше чем мест работы. И. И. Иванов, СПБГУ, Microsoft
-//                    for (int i = 0; i < authorsArray.size(); i++) {
-//                        authorPlusWorkplace.add(authorsArray.get(i).replaceAll("[¹²³12345]", ""));
+//            // Совмещаем авторов и их место работы:
+//            if (findFlag == 1) {
+//                if (workplace.size() <= authorsArray.size()) { // Если у нас Авторов больше или столько же, сколько и мест работы
+//                    for (int link = 1; link <= workplace.size(); link++) {
+//                        for (int i = 0; i < authorsArray.size(); i++) {
+//                            if (authorsArray.get(i).contains(Integer.toString(link))) {
+//                                String newString = (authorsArray.get(i) + ", " + workplace.get(link - 1) // формируем одну строку
+//                                ).replaceAll("[¹²³12345]", ""); // убираем ссылки
+////                    journalArray.put(authorsArray.get(i).replaceAll("[¹²³12345]", ""), workplace.get(link - 1).replaceAll("[¹²³12345]", ""));
+//                                authorPlusWorkplace.add(newString); // добавляем автора и его работу в список
+//                            }
+//                        }
 //                    }
-//                    for (int i = 0; i < workplace.size(); i++) {
-//                        authorPlusWorkplace.add(workplace.get(i).replaceAll("[¹²³12345]", "").trim());
-//                    }
-                    findFlag = 4;
-                }
-            }
+//                } else { // Если у нас авторов меньше чем мест работы. И. И. Иванов, СПБГУ, Microsoft
+////                    for (int i = 0; i < authorsArray.size(); i++) {
+////                        authorPlusWorkplace.add(authorsArray.get(i).replaceAll("[¹²³12345]", ""));
+////                    }
+////                    for (int i = 0; i < workplace.size(); i++) {
+////                        authorPlusWorkplace.add(workplace.get(i).replaceAll("[¹²³12345]", "").trim());
+////                    }
+//                    findFlag = 4;
+//                }
+//            }
 
             journalArray.put("Аннотация", annotation.substring(11)); // не используется
             journalArray.put("Ключевые слова", keywords.substring(16)); // не используется
@@ -184,7 +172,7 @@ public class JournalConstructorRU {
                     if (input.startsWith("Для цитирования:")) {
                         StringBuilder body = new StringBuilder();
                         //TODO зафигачить while !input.contains("//")
-                        while (!input.contains("//")){
+                        while (!input.contains("//")) {
                             body.append(input).append(" ");
                             input = reader.readLine();
                         }
@@ -208,7 +196,7 @@ public class JournalConstructorRU {
                     System.out.println("Row:" + rowCount++);
 
                     if (input.startsWith("Для цитирования:")) {
-                        while (input != null){
+                        while (input != null) {
                             body.append(input).append(" ");
                             input = reader.readLine();
                         }
@@ -245,26 +233,35 @@ public class JournalConstructorRU {
                 printWriter.println("<b>" + journalArray.get("Категория") + "</b>");
                 printWriter.println();
 
-                if (findFlag == 1) {
-                    for (int i = 0; i < authorPlusWorkplace.size(); i++) {
-                        printWriter.println(authorPlusWorkplace.get(i));
-                    }
-                } else if (findFlag == 3) {
-                    for (int i = 0; i < authorsArray.size(); i++) {
-                        printWriter.print(authorsArray.get(i) + ", ");
-                    }
-                    printWriter.println(workplace.get(0));
-                } else if (findFlag == 4) {
-                    for (int i = 0; i < authorsArray.size(); i++) {
-                        printWriter.print(authorsArray.get(i).replaceAll("[¹²³12345]", "") + ", ");
-                        for (int j = 0; j < workplace.size(); j++) {
-                            if (j != workplace.size() - 1) {
-                                printWriter.print(workplace.get(j).replaceAll("[¹²³12345]", "") + ", "); // добавляем кучу workplace
-                            } else printWriter.print(workplace.get(j).replaceAll("[¹²³12345]", ""));
-                        }
-                    }
-                    printWriter.println();
+                // Пишем авторов и их места работы в файл
+                AuthorParserRu authorParserRu = new AuthorParserRu();
+                ArrayList<String> authorAndWorkplaceList = authorParserRu.parser(file);
+
+                for (int i = 0; i < authorAndWorkplaceList.size(); i++) {
+                    printWriter.println(authorAndWorkplaceList.get(i));
                 }
+
+//                if (findFlag == 1) {
+//                    for (int i = 0; i < authorPlusWorkplace.size(); i++) {
+//                        printWriter.println(authorPlusWorkplace.get(i));
+//                    }
+//                } else if (findFlag == 3) {
+//                    for (int i = 0; i < authorsArray.size(); i++) {
+//                        printWriter.print(authorsArray.get(i) + ", ");
+//                    }
+//                    printWriter.println(workplace.get(0));
+//                } else if (findFlag == 4) {
+//                    for (int i = 0; i < authorsArray.size(); i++) {
+//                        printWriter.print(authorsArray.get(i).replaceAll("[¹²³12345]", "") + ", ");
+//                        for (int j = 0; j < workplace.size(); j++) {
+//                            if (j != workplace.size() - 1) {
+//                                printWriter.print(workplace.get(j).replaceAll("[¹²³12345]", "") + ", "); // добавляем кучу workplace
+//                            } else printWriter.print(workplace.get(j).replaceAll("[¹²³12345]", ""));
+//                        }
+//                    }
+//                    printWriter.println();
+//                }
+
                 printWriter.println();
                 printWriter.println("<b>Аннотация:</b> " + annotation.substring(11));
                 printWriter.println();
@@ -273,11 +270,11 @@ public class JournalConstructorRU {
                 printWriter.println("<b>Для цитирования: </b>" + journalArray.get("Для цитирования"));
                 printWriter.println();
                 printWriter.println("<div class=\"wp-block-buttons\"><!-- wp:button {\"style\":{\"border\":{\"radius\":\"0px\"},\"color\":{\"background\":\"#0077c8\"},\"typography\":{\"textTransform\":\"uppercase\",\"fontStyle\":\"normal\",\"fontWeight\":\"800\"}},\"className\":\"is-style-fill\",\"fontSize\":\"medium\"} -->\n" +
-                        "<div class=\"wp-block-button has-custom-font-size is-style-fill has-medium-font-size\" style=\"font-style:normal;font-weight:800;\"><a class=\"wp-block-button__link has-background wp-element-button\" href=\"http://aerocosmtech.ru/wp-content/uploads/2023/05/PDF-Том-1-выпуск-1-2023-"+ articleNum +"-ст.pdf\" style=\"border-radius:0px;background-color:#0077c8;padding: 0 15px 0 15px;font-weight: 600;font-size: 12px;line-height: 40px;\">Скачать статью</a></div>\n" +
+                        "<div class=\"wp-block-button has-custom-font-size is-style-fill has-medium-font-size\" style=\"font-style:normal;font-weight:800;\"><a class=\"wp-block-button__link has-background wp-element-button\" href=\"http://aerocosmtech.ru/wp-content/uploads/2023/07/Том-1-выпуск-2-2023-" + articleNum + "-ст.pdf\" style=\"border-radius:0px;background-color:#0077c8;padding: 0 15px 0 15px;font-weight: 600;font-size: 12px;line-height: 40px;\">Скачать статью</a></div>\n" +
                         "<!-- /wp:button --></div>");
                 printWriter.println("[/expand]");
 
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
