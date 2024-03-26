@@ -6,7 +6,7 @@ public class ComparablePractice {
     public static void main(String[] args) {
 
         Boy vitalik = new Boy("Vitalik", 15,165);
-        Boy vasya = new Boy("Vasya",14,160);
+        Boy vasya = new Boy("Vasya",14,160.02d);
         Boy vanya = new Boy("Vanya", 18,180);
 
         System.out.println("vitalik.compareTo(vasya) = " + vitalik.compareTo(vasya));

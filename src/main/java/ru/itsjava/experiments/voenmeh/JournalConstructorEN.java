@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 public class JournalConstructorEN {
     public static void main(String[] args) {
-        for (int articleNum = 1; articleNum <= 9; articleNum++) {
+        for (int articleNum = 1; articleNum <= 10; articleNum++) {
 
 
-            File file = new File("src/main/resources/voenmeh/2/en/2-" + articleNum);
+            File file = new File("src/main/resources/voenmeh/3/en/3-" + articleNum);
             HashMap<String, String> journalArray = new HashMap<>();
             ArrayList<String> authorsArray = new ArrayList<>();
             ArrayList<String> workplace = new ArrayList<>();
@@ -284,7 +284,7 @@ public class JournalConstructorEN {
                 printWriter.println("<b>For citation: </b>" + journalArray.get("Для цитирования"));
                 printWriter.println();
                 printWriter.println("<div class=\"wp-block-buttons\"><!-- wp:button {\"style\":{\"border\":{\"radius\":\"0px\"},\"color\":{\"background\":\"#0077c8\"},\"typography\":{\"textTransform\":\"uppercase\",\"fontStyle\":\"normal\",\"fontWeight\":\"800\"}},\"className\":\"is-style-fill\",\"fontSize\":\"medium\"} -->\n" +
-                        "<div class=\"wp-block-button has-custom-font-size is-style-fill has-medium-font-size\" style=\"font-style:normal;font-weight:800;\"><a class=\"wp-block-button__link has-background wp-element-button\" href=\"http://aerocosmtech.ru/wp-content/uploads/2023/07/Том-1-выпуск-2-2023-"+ articleNum +"-ст.pdf\" style=\"border-radius:0px;background-color:#0077c8;padding: 0 15px 0 15px;font-weight: 600;font-size: 12px;line-height: 40px;\">Download article</a></div>\n" +
+                        "<div class=\"wp-block-button has-custom-font-size is-style-fill has-medium-font-size\" style=\"font-style:normal;font-weight:800;\"><a class=\"wp-block-button__link has-background wp-element-button\" href=\"http://aerocosmtech.ru/wp-content/uploads/2023/10/Том-1-выпуск-3-2023-"+ articleNum +"-ст.pdf\" style=\"border-radius:0px;background-color:#0077c8;padding: 0 15px 0 15px;font-weight: 600;font-size: 12px;line-height: 40px;\">Download article</a></div>\n" +
                         "<!-- /wp:button --></div>");
                 printWriter.println("[/expand]");
 

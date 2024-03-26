@@ -71,7 +71,7 @@ public class AuthorParserRu {
                     // Парсим место работы авторов
                     if (input.startsWith("¹")) {
                         StringBuilder body = new StringBuilder();
-                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation")) {
+                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation") && !input.contains("Великобритания") && !input.contains("United Kingdom")) {
                             body.append(input);
                             input = reader.readLine();
                         }
@@ -79,7 +79,7 @@ public class AuthorParserRu {
                     }
                     if (input.startsWith("²")) {
                         StringBuilder body = new StringBuilder();
-                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation")) {
+                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation") && !input.contains("Великобритания") && !input.contains("United Kingdom")) {
                             body.append(input);
                             input = reader.readLine();
                         }
@@ -87,7 +87,7 @@ public class AuthorParserRu {
                     }
                     if (input.startsWith("³")) {
                         StringBuilder body = new StringBuilder();
-                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation")) {
+                        while (!input.contains("Российская Федерация") && !input.contains("Russian Federation") && !input.contains("Великобритания") && !input.contains("United Kingdom")) {
                             body.append(input);
                             input = reader.readLine();
                         }
