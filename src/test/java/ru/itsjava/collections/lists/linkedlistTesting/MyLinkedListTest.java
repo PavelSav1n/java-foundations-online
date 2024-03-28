@@ -126,6 +126,14 @@ public class MyLinkedListTest {
         // Очищаем, проверяем:
         list.clear();
         assertTrue(list.isEmpty());
+        // Checking several nodes:
+        list.add(DEFAULT_OBJECT);
+        list.add(DEFAULT_OBJECT);
+        list.add(DEFAULT_OBJECT);
+        list.add(DEFAULT_OBJECT);
+        System.out.println("list.size() = " + list.size());
+        list.clear();
+        assertTrue(list.isEmpty());
     }
 
     @Test
@@ -275,6 +283,10 @@ public class MyLinkedListTest {
         assertEquals("Obj10", list.get(9));
         // Пытаемся получить несуществующий индекс. Будет ошибка ArrayIndexOutOfBoundsException
         // list.get(99);
+        // Проверяем пустой список. Будет ошибка ArrayIndexOutOfBoundsException.
+//        list.clear();
+//        System.out.println("list.get(0) = " + list.get(0));
+
     }
 
 //    @Test

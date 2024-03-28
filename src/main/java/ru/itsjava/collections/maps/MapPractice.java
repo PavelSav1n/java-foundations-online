@@ -21,6 +21,12 @@ public class MapPractice {
         // А это множество пар:
         System.out.println("men.entrySet() = " + men.entrySet());
 
+        System.out.println("********");
+        System.out.println("men.get(sidorov) = " + men.get(sidorov));
+        System.out.println("********");
+        men.put(new Man("Джавов2"), "Свитер");
+        System.out.println("men.get(sidorov) = " + men.get(sidorov));
+
 
         System.out.println(" -------пробежаться по хэшмапе с помощью только ключей --------- ");
         // foreach     тип      переменн | множество пар в виде сета

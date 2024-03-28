@@ -56,6 +56,8 @@ public class IOStreamsPractice {
             e.printStackTrace();
         }
 
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
 
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(System.in);
     }
 }

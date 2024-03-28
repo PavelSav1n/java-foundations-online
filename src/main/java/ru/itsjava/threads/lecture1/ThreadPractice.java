@@ -1,8 +1,5 @@
 package ru.itsjava.threads.lecture1;
 
-import ru.itsjava.homeWork.threads.lecture1.PrinterRunnable;
-import ru.itsjava.homeWork.threads.lecture1.PrinterThread;
-
 public class ThreadPractice {
 
     public static void main(String[] args) throws InterruptedException {
@@ -40,12 +37,15 @@ public class ThreadPractice {
         // Создаём экземпляр класса PrinterThread (наследник Thread)
         PrinterThread printerThreadA = new PrinterThread("A", 2000L);
         PrinterThread printerThreadС = new PrinterThread("С", 2000L);
-//        PrinterThread printerThreadB = new PrinterThread("B", 3000L);
 
         // Создаём экземпляр класса PrinterRunnable (реализует интерфейс Runnable), который должен быть выполнен потоком
-        PrinterRunnable printerRunnable = new PrinterRunnable("B", 3000L);
+        PrinterRunnable printerRunnableB = new PrinterRunnable("B", 3000L);
         // Создаём отдельный поток и указываем наш класс, который должен быть выполнен потоком:
-        Thread threadB = new Thread(printerRunnable);
+        Thread threadB = new Thread(printerRunnableB);
+
+        // Creating loop thread, which we will try to interrupt without throwing exception. InterruptedException is thrown when thread is in sleep mode.
+        LoopRunnable loopRunnable = new LoopRunnable();
+        Thread threadLoopRunnable = new Thread(loopRunnable);
 
         // sout, который будет выполнен первым в связи с тем, что main -- первый поток, который выполняется в программе:
         System.out.println("start");
@@ -55,13 +55,20 @@ public class ThreadPractice {
         // Выполняем поток B
         threadB.start();
 
+
         // Приостанавливаем поток main до выполнения потока B
         threadB.join();
 
-        // Выполняем поток С
+        // Выполняем поток С вместе с loopRunnable.
         printerThreadС.start();
+        threadLoopRunnable.start();
 
+        // Waiting for printerThreadC to finish. loopRunnable is still executing.
         printerThreadС.join();
+
+        System.out.println("threadLoopRunnable.isInterrupted() = " + threadLoopRunnable.isInterrupted());
+        threadLoopRunnable.interrupt(); // Trying to interrupt
+        System.out.println("threadLoopRunnable.isInterrupted() = " + threadLoopRunnable.isInterrupted());
         // Продолжаем выполнения main, выводим sout из main:
         System.out.println("end");
 

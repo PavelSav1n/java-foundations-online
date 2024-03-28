@@ -65,6 +65,7 @@ public class MyArrayList {
 //        }
 
         // Тут нужно было добавить проверку на delIndex > -1, иначе мы смещали массив влево вне зависимости от того, нашли мы объект в массиве или нет.
+        // TODO: не уверен что вторая проверка необходима
         if (delIndex > -1 && (array.length - 1 - delIndex >= 0)) {
             System.arraycopy(array, delIndex + 1, array, delIndex, array.length - 1 - delIndex);
         }

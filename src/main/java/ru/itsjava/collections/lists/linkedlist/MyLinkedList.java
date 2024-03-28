@@ -129,6 +129,8 @@ public class MyLinkedList {
                     curNode.setValue(null);
                     // Затираем ссылку на этот узел в предыдущем:
                     prevNode.setNext(null);
+                    // TODO: ТУТ БЫЛА ОШИБКА. Нужно двигать prevNode, чтобы обнулять ссылки.
+                    prevNode = curNode;
                 }
             }
             // Конец списка. Обnullяем список:
@@ -340,10 +342,8 @@ public class MyLinkedList {
         }
     }
 
+    // Тут проверяется так же на непустой список, потому что используется метод size(), где чекаем head != null
     private boolean isCorrectIndex(int index) {
-        if ((index > -1) && (index < size())) {
-            return true;
-        }
-        return false;
+        return (index > -1) && (index < size());
     }
 }

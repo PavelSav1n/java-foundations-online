@@ -18,7 +18,7 @@ public class MyArrayListPractice {
         list.add("Privet4");
         list.add("Privet5");
         list.add("Privet6");
-        list.get(0);
+        System.out.println("list.get(0) = " + list.get(0));
 
         // Первый элемент
         list.add(0, "test");
@@ -30,7 +30,7 @@ public class MyArrayListPractice {
         list.add(list.size()-1, "test");
         System.out.println("list = " + list);
 
-        System.out.println("list.indexOf(\"Privet0\") = " + list.indexOf("test"));
+        System.out.println("list.indexOf(\"test\") = " + list.indexOf("test"));
 
         System.out.println("list.lastIndexOf(\"test\") = " + list.lastIndexOf("test"));
         System.out.println("list.lastIndexOf(\"Privet4\") = " + list.lastIndexOf("Privet4"));
