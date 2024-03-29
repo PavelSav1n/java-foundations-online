@@ -14,11 +14,11 @@ public class RunnableThreadHomework {
         Runnable runnable2 = () -> {
             for (int i = 0; i < 5; i++) {
                 try {
-                    Thread.sleep(4000L);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Привет, я проснулся после 4 секунд");
+                System.out.println("Привет, я проснулся после 1 секунды");
             }
         };
         // Создаём поток и передаём туда runnable2
@@ -27,6 +27,6 @@ public class RunnableThreadHomework {
         thread2.setDaemon(true);
         // Стартуем
         thread2.start();
-        // thread2 будет работать в JVM ещё 5*4 сек после завершения потока main
+        // thread2 будет работать в JVM ещё 5*1 сек после завершения потока main (we will not see this in console)
     }
 }

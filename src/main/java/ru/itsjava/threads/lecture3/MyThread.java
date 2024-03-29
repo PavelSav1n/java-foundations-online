@@ -10,6 +10,8 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
-        threadPractice.printNum(num);
+        System.out.println("Starting run");
+        threadPractice.printNum(num); // This is synchronized method;
+        System.out.println("Finishing run");
     }
 }
